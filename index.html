@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Australian Shopping Trolley</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f7f7f7;
+    }
+    h1 {
+      color: #2e7d32;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 8px;
+      margin-top: 10px;
+    }
+    button {
+      padding: 8px 12px;
+      margin: 5px 5px 0 0;
+    }
+    .custom-list {
+      margin-top: 20px;
+      background-color: #e0f2f1;
+      padding: 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Australian Shopping Trolley (US Products Swapped)</h1>
+
+  <div class="section">
+    <h2>Fresh Produce</h2>
+    <ul>
+      <li>Bananas (Australian-grown)</li>
+      <li>Apples</li>
+      <li>Carrots</li>
+      <li>Potatoes</li>
+      <li>Broccoli</li>
+      <li>Lettuce or baby spinach</li>
+      <li>Tomatoes</li>
+      <li>Avocados</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Meat & Deli</h2>
+    <ul>
+      <li>Chicken breast (Ingham’s or Lilydale)</li>
+      <li>Beef mince</li>
+      <li>Bacon (Don or Bangalow Sweet Pork)</li>
+      <li>Eggs (Pace Farm or Farm Pride)</li>
+      <li>Cheddar cheese (Bega or Devondale)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Bakery</h2>
+    <ul>
+      <li>Abbott’s Village Bakery bread</li>
+      <li>Simson’s Pantry wraps</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Pantry Staples</h2>
+    <ul>
+      <li>San Remo pasta</li>
+      <li>Five Brothers pasta sauce</li>
+      <li>SunRice rice</li>
+      <li>Ardmona canned tomatoes</li>
+      <li>SPC baked beans</li>
+      <li>Mayver’s or Bega peanut butter</li>
+      <li>Capilano honey</li>
+      <li>Vegemite</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Dairy & Fridge</h2>
+    <ul>
+      <li>Norco milk</li>
+      <li>Tamar Valley or Gippsland yoghurt</li>
+      <li>Western Star butter</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Drinks</h2>
+    <ul>
+      <li>Vittoria or Pablo & Rusty’s coffee</li>
+      <li>Bushells or T2 tea</li>
+      <li>Daily Juice Co. juice</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Snacks</h2>
+    <ul>
+      <li>Red Rock Deli or Kettle chips</li>
+      <li>Haigh’s, Darrell Lea or Koko Black chocolate</li>
+      <li>Bulla or Peters ice cream</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Household & Personal</h2>
+    <ul>
+      <li>Sorbent or Who Gives a Crap toilet paper</li>
+      <li>Earth Choice or Dynamo detergent</li>
+      <li>Earth Choice dishwashing liquid</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <h2>Add Your Own Item</h2>
+    <input type="text" id="customItem" placeholder="e.g. Local honey from markets">
+    <button onclick="addItem()">Add</button>
+    <button onclick="exportList()">Download My List</button>
+
+    <div class="custom-list">
+      <h3>Your Added Items:</h3>
+      <ul id="customList"></ul>
+    </div>
+  </div>
+
+  <script>
+    function addItem() {
+      const input = document.getElementById("customItem");
+      const list = document.getElementById("customList");
+      const itemText = input.value.trim();
+
+      if (itemText !== "") {
+        const li = document.createElement("li");
+        li.textContent = itemText;
+        list.appendChild(li);
+        input.value = "";
+      }
+    }
+
+    function exportList() {
+      const items = document.querySelectorAll("#customList li");
+      let content = "My Custom Shopping List:\n";
+      items.forEach(item => {
+        content += "- " + item.textContent + "\n";
+      });
+
+      const blob = new Blob([content], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "my-shopping-list.txt";
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
